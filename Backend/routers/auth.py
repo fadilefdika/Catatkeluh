@@ -1,55 +1,43 @@
-from fastapi import APIRouter, HTTPException, Header
-from pydantic import BaseModel
-from services.supabase_auth import register_user, login_user, get_user_profile
+from fastapi import APIRouter, HTTPException, Depends
+from backend.models.user import UserRegister, UserLogin, UserProfileUpdate
+from backend.services.supabase_auth import register_user, login_user, get_user_profile, update_user_profile
+from backend.middleware.auth_guard import verify_token
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-class AuthRequest(BaseModel):
-    email: str
-    password: str
-    nama: str
-
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
-
 @router.post("/register")
-def register(auth: AuthRequest):
-    result = register_user(auth.email, auth.password, auth.nama)
-
+def register(auth: UserRegister):
+    result = register_user(auth)
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
-
     return {
         "message": "User registered successfully",
-        "user": result["user"].email if result["user"] else None,
+        "user_id": result["user"].id if result.get("user") else None,
     }
-
 
 @router.post("/login")
-def login(auth: LoginRequest):
-    result = login_user(auth.email, auth.password)
-
-    # Jika error, raise HTTPException agar frontend dapat 400 dan pesan
+def login(auth: UserLogin):
+    result = login_user(auth)
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
-
     return {
         "access_token": result["access_token"],
-        "user": result["user"]["email"]  # ini dict, bukan objek
+        "user_id": result["user"].id,
+        "profile": result["profile"]
     }
-
 
 @router.get("/profile")
-def profile(authorization: str = Header(...)):
-    token = authorization.replace("Bearer ", "")
-    user = get_user_profile(token)
+def profile(user: dict = Depends(verify_token)):
+    user_id = user["uid"]
+    profile_data = get_user_profile(user_id)
+    if not profile_data:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return profile_data
 
-    if not user:
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
-
-    return {
-        "email": user.email,
-        "display_name": user.user_metadata.get("display_name")
-    }
+@router.put("/profile")
+def update_profile(data: UserProfileUpdate, user: dict = Depends(verify_token)):
+    user_id = user["uid"]
+    updated = update_user_profile(user_id, data)
+    if not updated:
+        raise HTTPException(status_code=400, detail="Failed to update profile")
+    return {"message": "Profile updated successfully", "profile": updated}

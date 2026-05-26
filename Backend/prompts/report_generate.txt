@@ -1,0 +1,31 @@
+Berdasarkan data intake berikut, buatkan laporan keluhan pasien dalam format terstruktur.
+
+DATA INTAKE:
+{extracted_data}
+
+ATURAN:
+1. JANGAN menulis diagnosa atau kemungkinan penyakit
+2. JANGAN merekomendasikan obat atau tindakan medis
+3. Tulis HANYA deskripsi keluhan pasien secara objektif dan terstruktur
+4. Gunakan bahasa yang bisa dipahami dokter (boleh pakai istilah medis standar)
+5. Format harus mengikuti struktur anamnesis standar
+
+OUTPUT FORMAT:
+Selalu respond dalam JSON murni (tanpa blok markdown seperti ```json):
+{
+  "chief_complaint": "...",
+  "history_of_present_illness": {
+    "onset": "...",
+    "location": "...",
+    "duration": "...",
+    "severity": ".../10",
+    "quality": "...",
+    "aggravating_factors": ["..."],
+    "relieving_factors": ["..."],
+    "associated_symptoms": ["..."]
+  },
+  "past_medical_history": "...",
+  "current_medications": "...",
+  "allergies": "...",
+  "additional_notes": "..."
+}

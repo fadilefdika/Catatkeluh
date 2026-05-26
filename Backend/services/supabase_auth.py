@@ -1,81 +1,64 @@
-from supabase import create_client, Client
-import os
-from dotenv import load_dotenv
+from backend.config.supabase_client import supabase
 from gotrue.errors import AuthApiError
+from backend.models.user import UserRegister, UserLogin, UserProfileUpdate
 
-# Load .env file
-load_dotenv()
-
-# Ambil environment variables
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-
-# Debug: Cek apakah terbaca
-print("SUPABASE_URL:", SUPABASE_URL)
-print("SUPABASE_KEY:", SUPABASE_KEY[:8] + "..." if SUPABASE_KEY else None)
-
-# Buat client
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-# Fungsi register
-def register_user(email: str, password: str, nama: str):
+def register_user(data: UserRegister):
     try:
         response = supabase.auth.sign_up({
-            "email": email,
-            "password": password,
+            "email": data.email,
+            "password": data.password,
+            "options": {
+                "data": {
+                    "full_name": data.full_name
+                }
+            }
         })
+        
+        user = response.user
+        if user:
+            # Upsert into profiles
+            supabase.table("profiles").upsert({
+                "id": user.id,
+                "full_name": data.full_name
+            }).execute()
 
-        # Jika ingin menyimpan `nama` ke user metadata
-        if response.user:
-            supabase.auth.update_user(
-                {"data": {"nama": nama}}
-            )
-
-        return {
-            "user": response.user,
-            "session": response.session,
-        }
-
+        return {"user": user, "session": response.session}
     except AuthApiError as e:
         error_message = str(e).lower()
-
-        if "user already registered" in error_message:
+        if "already registered" in error_message:
             return {"error": "Email sudah digunakan"}
-        elif "invalid email" in error_message:
-            return {"error": "Format email tidak valid"}
-        elif "password should be at least" in error_message:
-            return {"error": "Password terlalu pendek"}
-        else:
-            return {"error": f"Terjadi kesalahan saat registrasi: {e}"}
+        return {"error": f"Registrasi gagal: {error_message}"}
+    except Exception as e:
+        return {"error": str(e)}
 
-# Fungsi login
-def login_user(email: str, password: str) -> dict:
+def login_user(data: UserLogin) -> dict:
     try:
         response = supabase.auth.sign_in_with_password({
-            "email": email,
-            "password": password
+            "email": data.email,
+            "password": data.password
         })
-
-        data = response.model_dump()
-
+        
+        user_id = response.user.id
+        profile_res = supabase.table("profiles").select("*").eq("id", user_id).single().execute()
+        profile_data = profile_res.data if profile_res.data else {}
+        
         return {
-            "access_token": data["session"]["access_token"],
-            "user": data["user"]
+            "access_token": response.session.access_token,
+            "user": response.user,
+            "profile": profile_data
         }
-
     except AuthApiError as e:
-        error_message = str(e).lower()
+        return {"error": "Email atau password salah"}
+    except Exception as e:
+        return {"error": str(e)}
 
-        if "invalid login credentials" in error_message:
-            return {"error": "Email atau password salah"}
-        elif "user not found" in error_message:
-            return {"error": "Email tidak ditemukan"}
-        elif "email not confirmed" in error_message:
-            return {"error": "Email belum dikonfirmasi"}
-        else:
-            return {"error": f"Gagal login: {error_message}"}
+def get_user_profile(user_id: str):
+    profile_res = supabase.table("profiles").select("*").eq("id", user_id).single().execute()
+    return profile_res.data if profile_res.data else None
 
-
-def get_user_profile(token: str):
-    response = supabase.auth.get_user(token)
-    return response.user if not response.get("error") else None
+def update_user_profile(user_id: str, data: UserProfileUpdate):
+    update_data = {k: v for k, v in data.model_dump().items() if v is not None}
+    if not update_data:
+        return None
+    res = supabase.table("profiles").update(update_data).eq("id", user_id).execute()
+    return res.data[0] if res.data else None
