@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 import api from "@/lib/api";
 import Link from "next/link";
-
+import Navbar from "@/components/landing/Navbar";
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,20 +54,10 @@ export default function RegisterPage() {
         <div className="w-64 h-64 bg-secondary-fixed blur-3xl rounded-full -translate-x-1/2"></div>
       </div>
 
-      {/* TopAppBar */}
-      <header className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-14 max-w-[768px] mx-auto bg-surface dark:bg-surface-dim">
-        <Link href="/" className="font-headline-lg-mobile md:font-headline-lg text-primary dark:text-primary-fixed-dim tracking-tight font-bold">
-          Catatkeluh
-        </Link>
-        <div className="flex items-center gap-4">
-          <button className="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-100 flex items-center">
-            <span className="material-symbols-outlined">help_outline</span>
-          </button>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content: Registration Canvas */}
-      <main className="flex-grow flex items-center justify-center pt-16 pb-2 px-gutter">
+      <main className="flex-grow flex items-center justify-center py-8 px-gutter">
         <div className="w-full max-w-[768px] flex flex-col items-center">
           
           {/* Registration Card */}

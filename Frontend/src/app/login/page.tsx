@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 import api from "@/lib/api";
 import Link from "next/link";
-
+import Navbar from "@/components/landing/Navbar";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,15 +34,10 @@ export default function LoginPage() {
 
   return (
     <div className="bg-surface text-on-surface min-h-screen flex flex-col font-body-md antialiased">
-      {/* Top Navigation Anchor */}
-      <header className="fixed top-0 left-0 w-full h-16 flex items-center px-margin-mobile md:px-margin-desktop z-50">
-        <div className="max-w-max">
-          <Link href="/" className="font-headline-lg-mobile md:font-headline-lg text-primary tracking-tight font-bold">Catatkeluh</Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content Canvas */}
-      <main className="flex-grow flex items-center justify-center px-margin-mobile pt-16 pb-2 bg-[radial-gradient(circle_at_top_left,#ffffff_0%,#f3f3fe_100%)]">
+      <main className="flex-grow flex items-center justify-center px-margin-mobile py-8 bg-[radial-gradient(circle_at_top_left,#ffffff_0%,#f3f3fe_100%)]">
         <div className="w-full max-w-[768px] animate-in fade-in slide-in-from-bottom-4 duration-700">
           
           {/* Auth Card */}
