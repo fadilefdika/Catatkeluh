@@ -1,40 +1,59 @@
-from backend.config.supabase_client import supabase
+from config.supabase_client import supabase
 from gotrue.errors import AuthApiError
-from backend.models.user import UserRegister, UserLogin, UserProfileUpdate
+from models.user import UserRegister, UserLogin, UserProfileUpdate
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("catatkeluh.debug")
 
 def register_user(data: UserRegister):
     try:
-        response = supabase.auth.sign_up({
-            "email": data.email,
+        email = data.email.strip() if data.email else data.email
+        
+        # Menyusun payload untuk Supabase Auth
+        auth_payload = {
+            "email": email,
             "password": data.password,
             "options": {
                 "data": {
                     "full_name": data.full_name
                 }
             }
-        })
+        }
+        
+        # Eksekusi pendaftaran akun ke skema auth
+        response = supabase.auth.sign_up(auth_payload)
         
         user = response.user
         if user:
-            # Upsert into profiles
-            supabase.table("profiles").upsert({
+            profile_payload = {
                 "id": user.id,
                 "full_name": data.full_name
-            }).execute()
+            }
+            
+            supabase.table("profiles").upsert(profile_payload).execute()
 
         return {"user": user, "session": response.session}
+        
     except AuthApiError as e:
         error_message = str(e).lower()
+        # --- DEBUG EXCEPTION: ERROR DARI SUPABASE AUTH ---
+        logger.error(f"========== [DEBUG ERROR] AuthApiError Terdeteksi: {error_message} ==========")
+        
         if "already registered" in error_message:
             return {"error": "Email sudah digunakan"}
         return {"error": f"Registrasi gagal: {error_message}"}
+        
     except Exception as e:
+        # --- DEBUG EXCEPTION: ERROR UMUM/TEKNIS ---
+        logger.error(f"========== [DEBUG ERROR] General Exception Terdeteksi: {str(e)} ==========")
         return {"error": str(e)}
 
 def login_user(data: UserLogin) -> dict:
     try:
+        email = data.email.strip() if data.email else data.email
         response = supabase.auth.sign_in_with_password({
-            "email": data.email,
+            "email": email,
             "password": data.password
         })
         

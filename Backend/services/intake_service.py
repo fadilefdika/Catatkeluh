@@ -1,6 +1,6 @@
-import json
-from backend.config.supabase_client import supabase
-from backend.services.ai_service import ask_ai
+﻿import json
+from config.supabase_client import supabase
+from services.ai_service import ask_ai
 import os
 
 def read_prompt(filename: str) -> str:

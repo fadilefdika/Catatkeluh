@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, Depends
-from backend.models.user import UserRegister, UserLogin, UserProfileUpdate
-from backend.services.supabase_auth import register_user, login_user, get_user_profile, update_user_profile
-from backend.middleware.auth_guard import verify_token
+﻿from fastapi import APIRouter, HTTPException, Depends
+from models.user import UserRegister, UserLogin, UserProfileUpdate
+from services.supabase_auth import register_user, login_user, get_user_profile, update_user_profile
+from middleware.auth_guard import verify_token
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 

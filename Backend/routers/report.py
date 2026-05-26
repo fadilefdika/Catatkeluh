@@ -1,10 +1,10 @@
-from fastapi import APIRouter, HTTPException, Depends
-from backend.models.report import GenerateReportRequest
-from backend.services.report_service import (
+﻿from fastapi import APIRouter, HTTPException, Depends
+from models.report import GenerateReportRequest
+from services.report_service import (
     generate_report, get_report, list_reports, 
     get_shared_report, share_report
 )
-from backend.middleware.auth_guard import verify_token
+from middleware.auth_guard import verify_token
 
 router = APIRouter(prefix="/report", tags=["report"])
 

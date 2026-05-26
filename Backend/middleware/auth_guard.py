@@ -1,5 +1,5 @@
-from fastapi import Request, HTTPException, Depends
-from backend.config.supabase_client import supabase
+﻿from fastapi import Request, HTTPException, Depends
+from config.supabase_client import supabase
 
 def verify_token(request: Request):
     """

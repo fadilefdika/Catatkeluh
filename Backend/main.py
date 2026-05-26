@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import auth, intake, report
+from routers import auth, intake, report
 
 app = FastAPI(title="Catatkeluh API")
 

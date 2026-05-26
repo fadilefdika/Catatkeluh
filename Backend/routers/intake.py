@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException, Depends
-from backend.models.intake import StartIntakeRequest, RespondIntakeRequest
-from backend.services.intake_service import start_new_session, get_session, process_intake_response
-from backend.middleware.auth_guard import verify_token
-from backend.config.supabase_client import supabase
+﻿from fastapi import APIRouter, HTTPException, Depends
+from models.intake import StartIntakeRequest, RespondIntakeRequest
+from services.intake_service import start_new_session, get_session, process_intake_response
+from middleware.auth_guard import verify_token
+from config.supabase_client import supabase
 
 router = APIRouter(prefix="/intake", tags=["intake"])
 
