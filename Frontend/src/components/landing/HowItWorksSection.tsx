@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -7,12 +9,12 @@ export default function HowItWorksSection() {
       <div className="abstract-pattern absolute inset-0 opacity-40"></div>
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
-          <div className="max-w-xl">
+          <div>
             <h2 className="text-2xl font-bold text-on-surface mb-2">Bagaimana Catatkeluh Membantumu?</h2>
             <p className="text-sm text-on-surface-variant">Proses sederhana dalam 3 langkah untuk mendapatkan hasil konsultasi dokter yang lebih maksimal.</p>
           </div>
           <div className="hidden md:block">
-            <button type="button" onClick={() => alert("Halaman panduan sedang disiapkan.")} className="flex items-center space-x-1.5 text-primary text-sm font-bold hover:underline">
+            <button type="button" onClick={() => alert('Halaman panduan sedang disiapkan.')} className="flex items-center space-x-1.5 text-primary text-sm font-bold hover:underline">
               <span>Lihat panduan lengkap</span>
               <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
             </button>
@@ -22,7 +24,7 @@ export default function HowItWorksSection() {
           {/* Step 1 */}
           <div className="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant/30 flex flex-col h-full shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center text-lg font-bold">1</div>
+              <div className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold">1</div>
               <span className="material-symbols-outlined text-outline-variant text-[20px]">chat_bubble</span>
             </div>
             <h4 className="text-base font-bold mb-1.5">Cerita Keluhan</h4>
@@ -59,7 +61,7 @@ export default function HowItWorksSection() {
           </div>
         </div>
         <div className="mt-10 text-center">
-          <Link href="/register" className="inline-block px-8 py-3 bg-primary text-on-primary rounded-lg font-bold text-base shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
+          <Link href="/register" className="inline-block px-8 py-3 bg-primary text-white rounded-lg font-bold text-base shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
             Coba Sekarang — Gratis
           </Link>
         </div>

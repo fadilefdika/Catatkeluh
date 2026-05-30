@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -17,10 +19,14 @@ export default function HeroSection() {
           </h1>
           <p className="text-sm text-on-surface-variant mb-6">Asisten intake medis berbasis AI yang membantu kamu menyusun laporan keluhan terstruktur. Tak ada lagi gejala yang terlewat saat konsultasi dengan dokter.</p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/register" className="px-5 py-2.5 bg-primary text-on-primary rounded-lg font-bold text-sm transition-all active:scale-95 shadow-sm hover:shadow-primary/20 hover:shadow-md inline-block text-center">
+            <Link href="/register" className="px-5 py-2.5 bg-primary text-on-primary rounded-lg font-bold text-sm transition-all text-white active:scale-95 shadow-sm hover:shadow-primary/20 hover:shadow-md inline-block text-center">
               Mulai Sekarang
             </Link>
-            <button type="button" onClick={() => alert("Fitur contoh laporan sedang dalam pengembangan.")} className="px-5 py-2.5 border border-outline text-primary rounded-lg font-bold text-sm hover:bg-surface-container-low transition-all inline-block text-center">
+            <button
+              type="button"
+              onClick={() => alert('Fitur contoh laporan sedang dalam pengembangan.')}
+              className="px-5 py-2.5 border border-outline text-primary rounded-lg font-bold text-sm hover:bg-surface-container-low transition-all inline-block text-center"
+            >
               Lihat Contoh Laporan
             </button>
           </div>
@@ -37,7 +43,15 @@ export default function HeroSection() {
         </div>
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative w-[240px] md:w-[280px] rounded-2xl overflow-hidden shadow-lg glass-card p-1.5 border border-outline-variant/30 hover:border-primary/40 transition-colors duration-300">
-            <Image alt="Medical Assistant Interface" className="w-full h-auto rounded-xl object-cover aspect-[4/5]" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" width={400} height={500} priority unoptimized />
+            <Image
+              alt="Medical Assistant Interface"
+              className="w-full h-auto rounded-xl object-cover aspect-[4/5]"
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+              width={400}
+              height={500}
+              priority
+              unoptimized
+            />
           </div>
           {/* Floating elements for visual interest */}
           <div className="absolute -bottom-3 -left-3 bg-white p-2 rounded-lg shadow-md border border-outline-variant/20 hidden md:block z-10">
