@@ -20,9 +20,9 @@ export default function HeroSection() {
             <Link href="/register" className="px-5 py-2.5 bg-primary text-on-primary rounded-lg font-bold text-sm transition-all active:scale-95 shadow-sm hover:shadow-primary/20 hover:shadow-md inline-block text-center">
               Mulai Sekarang
             </Link>
-            <Link href="#" className="px-5 py-2.5 border border-outline text-primary rounded-lg font-bold text-sm hover:bg-surface-container-low transition-all inline-block text-center">
+            <button type="button" onClick={() => alert("Fitur contoh laporan sedang dalam pengembangan.")} className="px-5 py-2.5 border border-outline text-primary rounded-lg font-bold text-sm hover:bg-surface-container-low transition-all inline-block text-center">
               Lihat Contoh Laporan
-            </Link>
+            </button>
           </div>
           <div className="mt-6 flex items-center space-x-3">
             <div className="flex -space-x-2">

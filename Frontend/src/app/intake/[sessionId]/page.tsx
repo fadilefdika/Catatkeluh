@@ -172,7 +172,7 @@ export default function IntakePage() {
              </button>
           ) : (
             <div className="flex items-center gap-2 bg-surface rounded-full border border-outline-variant p-1 focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all duration-200 shadow-sm">
-              <button className="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors shrink-0">
+              <button type="button" onClick={() => alert("Fitur lampiran file medis sedang dalam pengembangan.")} className="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-variant transition-colors shrink-0">
                 <span className="material-symbols-outlined text-[20px]">attach_file</span>
               </button>
               <input 

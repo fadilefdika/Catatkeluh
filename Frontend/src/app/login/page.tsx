@@ -90,7 +90,7 @@ export default function LoginPage() {
                 <div className="flex flex-col gap-1 group">
                   <div className="flex justify-between items-center px-1">
                     <label className="text-xs text-on-surface-variant font-medium" htmlFor="password">Kata Sandi</label>
-                    <Link href="#" className="text-[11px] text-primary hover:underline transition-all font-bold">Lupa Kata Sandi?</Link>
+                    <button type="button" onClick={() => alert("Fitur Lupa Kata Sandi sedang dalam pengembangan.")} className="text-[11px] text-primary hover:underline transition-all font-bold">Lupa Kata Sandi?</button>
                   </div>
                   <div className="relative rounded-lg transition-all duration-200 focus-within:ring-[2px] focus-within:ring-white focus-within:ring-offset-[2px] focus-within:ring-offset-primary hover:scale-[1.01]">
                     <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">lock</span>

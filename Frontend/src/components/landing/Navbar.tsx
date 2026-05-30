@@ -12,7 +12,7 @@ export default function Navbar() {
         <Link href="/dashboard/reports" className="text-on-surface-variant font-medium hover:text-primary transition-colors text-sm">
           Laporan
         </Link>
-        <Link href="#" className="text-on-surface-variant font-medium hover:text-primary transition-colors text-sm">
+        <Link href="#about" className="text-on-surface-variant font-medium hover:text-primary transition-colors text-sm">
           Tentang Kami
         </Link>
       </div>
@@ -25,7 +25,7 @@ export default function Navbar() {
             Daftar
           </Link>
         </div>
-        <button className="p-2 text-on-surface-variant hover:text-primary transition-colors">
+        <button onClick={() => alert("Belum ada notifikasi baru.")} className="p-2 text-on-surface-variant hover:text-primary transition-colors">
           <span className="material-symbols-outlined text-[20px]">notifications</span>
         </button>
         <div className="relative w-7 h-7 rounded-full bg-surface-container-highest overflow-hidden">

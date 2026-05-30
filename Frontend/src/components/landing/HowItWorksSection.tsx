@@ -12,10 +12,10 @@ export default function HowItWorksSection() {
             <p className="text-sm text-on-surface-variant">Proses sederhana dalam 3 langkah untuk mendapatkan hasil konsultasi dokter yang lebih maksimal.</p>
           </div>
           <div className="hidden md:block">
-            <Link href="#" className="flex items-center space-x-1.5 text-primary text-sm font-bold hover:underline">
+            <button type="button" onClick={() => alert("Halaman panduan sedang disiapkan.")} className="flex items-center space-x-1.5 text-primary text-sm font-bold hover:underline">
               <span>Lihat panduan lengkap</span>
               <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </Link>
+            </button>
           </div>
         </div>
         <div className="grid lg:grid-cols-3 gap-5">

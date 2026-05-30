@@ -18,19 +18,19 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   Cara Kerja
-                </Link>
+                </button>
               </li>
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   FAQ
-                </Link>
+                </button>
               </li>
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   Blog
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -38,19 +38,19 @@ export default function Footer() {
             <h5 className="text-sm font-bold text-on-surface mb-3">Legal</h5>
             <ul className="space-y-2 text-xs text-on-surface-variant">
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   Kebijakan Privasi
-                </Link>
+                </button>
               </li>
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   Syarat & Ketentuan
-                </Link>
+                </button>
               </li>
               <li>
-                <Link className="hover:text-primary" href="#">
+                <button type="button" onClick={() => alert("Halaman ini sedang dalam pengembangan.")} className="hover:text-primary transition-colors text-left">
                   Keamanan Data
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -58,12 +58,12 @@ export default function Footer() {
         <div className="pt-6 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-[11px] text-on-surface-variant">© 2024 Catatkeluh. Bukan pengganti saran medis profesional.</p>
           <div className="flex space-x-4">
-            <Link className="text-on-surface-variant hover:text-primary transition-colors" href="#">
+            <button type="button" onClick={() => alert("Fitur bahasa sedang dalam pengembangan.")} className="text-on-surface-variant hover:text-primary transition-colors">
               <span className="material-symbols-outlined text-[18px]">language</span>
-            </Link>
-            <Link className="text-on-surface-variant hover:text-primary transition-colors" href="#">
+            </button>
+            <button type="button" onClick={() => alert("Fitur kontak sedang dalam pengembangan.")} className="text-on-surface-variant hover:text-primary transition-colors">
               <span className="material-symbols-outlined text-[18px]">mail</span>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
