@@ -1,9 +1,35 @@
-﻿from fastapi import FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, intake, report
 
-app = FastAPI(title="Catatkeluh API")
+tags_metadata = [
+    {
+        "name": "auth",
+        "description": "Operasi autentikasi dan manajemen profil pengguna.",
+    },
+    {
+        "name": "intake",
+        "description": "Logika inti asisten medis AI untuk wawancara pasien.",
+    },
+    {
+        "name": "report",
+        "description": "Pembuatan, pengambilan, dan pembagian laporan medis berformat SOAP.",
+    },
+]
 
+app = FastAPI(
+    title="Catatkeluh API",
+    description="""
+**Catatkeluh API** adalah tulang punggung (backend) untuk aplikasi asisten medis berbasis AI.
+API ini mengelola autentikasi pengguna, alur wawancara (*intake*) dengan AI, serta pembuatan laporan anamnesis medis terstruktur yang siap dibaca oleh dokter.
+    """,
+    version="1.0.0",
+    contact={
+        "name": "Tim Catatkeluh",
+        "email": "fadilefd1102@gmail.com",
+    },
+    openapi_tags=tags_metadata
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], 
